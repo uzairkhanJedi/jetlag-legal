@@ -14,9 +14,13 @@ app's actual behaviour, not to reserve rights we don't use.
 
 Two things described below are live for the first time in 1.9.0: the optional
 flight lookup, and the one-time paid unlock. Earlier builds shipped with both
-switched off, so the app made no network requests at all. The wording has not
-changed; what changed is that these sections now describe something you can
-actually reach.
+switched off, so the app made no network requests at all — these sections now
+describe something you can actually reach.
+
+The flight lookup section has also been corrected. It previously named only
+AeroDataBox as the recipient; the request in fact goes to API.Market first,
+which forwards it. Both are now named, because the company that receives your
+data is exactly the thing a privacy policy exists to tell you.
 
 **The short version:** Jet Lag has no accounts and no servers. Everything you
 enter stays on your device. The only information that ever leaves your device
@@ -51,18 +55,26 @@ option on Android.
 ### Flight lookup (optional)
 
 If you type a flight number and tap **Look up**, the app sends **that flight
-number and the departure date** to AeroDataBox, a third-party flight schedule
-service, in order to fetch the airports and scheduled times.
+number and the departure date** off your device in order to fetch the airports
+and scheduled times.
+
+**Two companies are involved, and you should know both.** The request goes to
+**API.Market**, an API marketplace, at `prod.api.market`. API.Market passes it
+on to **AeroDataBox**, the flight schedule service that actually answers it. We
+hold an account with API.Market rather than with AeroDataBox directly, so
+API.Market is the company your request reaches first.
 
 - This happens **only** when you actively tap "Look up". It never happens in
   the background.
 - Nothing else is sent — no identifier, no account, no other trip data, and
   nothing about your sleep preferences.
-- As with any internet request, the service receives your device's IP address.
+- As with any internet request, API.Market receives your device's IP address,
+  and may pass it on.
 - The feature is entirely optional. You can enter every flight by hand and the
   app never contacts the network at all.
 
-AeroDataBox's own privacy terms govern what they do with requests they receive.
+**API.Market's and AeroDataBox's own privacy terms** govern what each of them
+does with the requests they receive. We have no control over either.
 
 ### Purchases
 

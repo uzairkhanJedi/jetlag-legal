@@ -1,0 +1,5 @@
+Deliberately NOT a .nojekyll file.
+
+Jekyll is what renders the Markdown to HTML here, so disabling it would serve
+raw Markdown to a store reviewer. If you ever switch to hand-written HTML,
+add a real .nojekyll then.

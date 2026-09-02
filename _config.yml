@@ -1,0 +1,13 @@
+# GitHub Pages serves this repo. It exists for one reason: the App Store and
+# Google Play both require a publicly reachable privacy policy URL and a
+# support URL, and the app's own repo is private.
+#
+# Nothing here is app source. Keep it that way — this repo is public.
+title: Jet Lag
+description: Privacy policy and support for the Jet Lag app.
+# No remote theme: the layout is local and self-contained, so a theme
+# deprecation upstream can never take the privacy URL offline mid-review.
+plugins: []
+exclude:
+  - README.md
+  - sync-privacy.sh

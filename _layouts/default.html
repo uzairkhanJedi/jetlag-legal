@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ page.title }} · Jet Lag</title>
+<style>
+  /* Self-contained on purpose. A store reviewer opening this on a phone with a
+     slow connection should get the whole page in one request — no webfont, no
+     CDN, nothing that can fail and leave a required URL looking broken. */
+  :root {
+    --bg: #ffffff;
+    --fg: #16182b;
+    --muted: #5b5f77;
+    --rule: #e3e5ef;
+    --brand: #5A4FCF;
+    --card: #f7f7fb;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #070A1C;
+      --fg: #e9eaf2;
+      --muted: #a2a6bd;
+      --rule: #21253f;
+      --brand: #9B8CFF;
+      --card: #10142a;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+    -webkit-text-size-adjust: 100%;
+  }
+  .wrap { max-width: 44rem; margin: 0 auto; padding: 2.5rem 1.25rem 5rem; }
+  header { border-bottom: 1px solid var(--rule); padding-bottom: 1rem; margin-bottom: 2rem; }
+  header a.brand {
+    font-weight: 700; font-size: 1.05rem; color: var(--fg);
+    text-decoration: none; letter-spacing: -0.01em;
+  }
+  nav { margin-top: 0.6rem; font-size: 0.95rem; }
+  nav a { color: var(--brand); text-decoration: none; margin-right: 1.1rem; }
+  nav a:hover { text-decoration: underline; }
+  h1 { font-size: 1.85rem; line-height: 1.25; letter-spacing: -0.02em; margin: 0 0 1.25rem; }
+  h2 { font-size: 1.25rem; margin: 2.4rem 0 0.75rem; letter-spacing: -0.01em; }
+  h3 { font-size: 1.05rem; margin: 1.8rem 0 0.5rem; }
+  p, li { color: var(--fg); }
+  a { color: var(--brand); }
+  ul { padding-left: 1.25rem; }
+  li { margin: 0.35rem 0; }
+  hr { border: 0; border-top: 1px solid var(--rule); margin: 2.5rem 0; }
+  blockquote {
+    margin: 1.5rem 0; padding: 0.9rem 1.1rem;
+    background: var(--card); border-left: 3px solid var(--brand); border-radius: 6px;
+  }
+  blockquote p { margin: 0; }
+  code { background: var(--card); padding: 0.1em 0.35em; border-radius: 4px; font-size: 0.9em; }
+  footer {
+    margin-top: 4rem; padding-top: 1.25rem; border-top: 1px solid var(--rule);
+    color: var(--muted); font-size: 0.875rem;
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="{{ '/' | relative_url }}">Jet Lag</a>
+      <nav>
+        <a href="{{ '/privacy/' | relative_url }}">Privacy</a>
+        <a href="{{ '/support/' | relative_url }}">Support</a>
+      </nav>
+    </header>
+    <main>
+      {{ content }}
+    </main>
+    <footer>
+      Jet Lag — a jet-lag planning app for iOS and Android.<br>
+      Contact: <a href="mailto:uzairkhan@gmail.com">uzairkhan@gmail.com</a>
+    </footer>
+  </div>
+</body>
+</html>

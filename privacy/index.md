@@ -18,13 +18,16 @@ switched off, so the app made no network requests at all — these sections now
 describe something you can actually reach.
 
 The flight lookup section has also been corrected. It previously named only
-AeroDataBox as the recipient; the request in fact goes to API.Market first,
+AeroDataBox as the recipient; the request in fact reaches a marketplace first,
 which forwards it. Both are now named, because the company that receives your
-data is exactly the thing a privacy policy exists to tell you.
+data is exactly the thing a privacy policy exists to tell you. That marketplace
+is **RapidAPI** as of 1.9.0 — it was briefly API.Market during development, and
+no build carrying that gateway was ever released.
 
-**The short version:** Jet Lag has no accounts and no servers. Everything you
-enter stays on your device. The only information that ever leaves your device
-is a flight number and date, and only at the moment you tap "Look up".
+**The short version:** Jet Lag has no accounts and no servers. **Everything you
+enter — your trips, your flights, your sleep times — stays on your device.**
+Two things do leave it: a flight number and date if you tap "Look up", and
+anonymous counts of which screens you use, which you can switch off.
 
 ---
 
@@ -59,22 +62,59 @@ number and the departure date** off your device in order to fetch the airports
 and scheduled times.
 
 **Two companies are involved, and you should know both.** The request goes to
-**API.Market**, an API marketplace, at `prod.api.market`. API.Market passes it
-on to **AeroDataBox**, the flight schedule service that actually answers it. We
-hold an account with API.Market rather than with AeroDataBox directly, so
-API.Market is the company your request reaches first.
+**RapidAPI**, an API marketplace, at `aerodatabox.p.rapidapi.com`. RapidAPI
+passes it on to **AeroDataBox**, the flight schedule service that actually
+answers it. We hold an account with RapidAPI rather than with AeroDataBox
+directly, so RapidAPI is the company your request reaches first.
 
 - This happens **only** when you actively tap "Look up". It never happens in
   the background.
 - Nothing else is sent — no identifier, no account, no other trip data, and
   nothing about your sleep preferences.
-- As with any internet request, API.Market receives your device's IP address,
+- As with any internet request, RapidAPI receives your device's IP address,
   and may pass it on.
 - The feature is entirely optional. You can enter every flight by hand and the
   app never contacts the network at all.
 
-**API.Market's and AeroDataBox's own privacy terms** govern what each of them
+**RapidAPI's and AeroDataBox's own privacy terms** govern what each of them
 does with the requests they receive. We have no control over either.
+
+### Anonymous usage data (you can turn this off)
+
+The app records **which screens get used**, so I can see which parts of the app
+help and which get abandoned. It is sent to **PostHog**, an analytics service,
+and stored on their **European servers**.
+
+**What is recorded is a list of plain event names, and nothing else:**
+
+- that onboarding was completed
+- that a trip was created, or that a plan was opened
+- that the upgrade screen appeared, and whether a purchase completed, was
+  cancelled, or failed
+- that a flight lookup succeeded or failed
+
+**What is deliberately never recorded**, and this is the part that matters:
+
+- **Nothing you type or choose.** No trip names, no airports or routes, no
+  dates, no flight numbers, no bedtimes or wake times, no time zone.
+- No name, email, account, advertising identifier, or device identifier we
+  create.
+- No location, and no screen recordings.
+
+The events carry **no properties at all** — not even indirect ones like how
+many flights a trip has, because that is still a fact about your trip. An event
+says "a trip was created", never which trip. Two people with completely
+different itineraries send byte-for-byte identical events.
+
+As with any internet request, PostHog receives the IP address you connect from.
+No profile is built against it.
+
+**To turn it off:** open the **You** tab and switch off **Share anonymous
+usage**. Nothing further is sent from that moment. Everything in the app keeps
+working exactly the same — there is no feature behind this, and you are not
+asked again.
+
+PostHog's own privacy terms govern what they do with what they receive.
 
 ### Purchases
 
@@ -88,8 +128,10 @@ Apple's and Google's privacy policies govern those transactions.
 ## What the app does not do
 
 - **No accounts.** There is nothing to sign up for and no password.
-- **No analytics or tracking.** The app contains no analytics, telemetry,
-  advertising, attribution, or crash-reporting SDKs of any kind.
+- **No advertising or attribution SDKs, and no cross-app tracking.** The app
+  contains no advertising, attribution, or crash-reporting SDKs, and nothing
+  that follows you between apps or websites. It does include one analytics
+  tool — see "Anonymous usage data" below, including how to turn it off.
 - **No advertising**, and no sharing of data with advertisers.
 - **No sale of personal information.**
 - **No location access.** The app never requests or reads your device location.

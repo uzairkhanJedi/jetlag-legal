@@ -6,7 +6,7 @@ title: Privacy Policy
 
 # Privacy Policy for Jet Lag
 
-**Effective date: 2 September 2026** — applies to version 1.9.0 onwards.
+**Effective date: 19 September 2026** — applies to version 1.9.0 onwards.
 
 Jet Lag is a jet-lag planning app. This policy explains exactly what the app
 does and does not do with your information. It is written to describe the
@@ -97,14 +97,24 @@ and stored on their **European servers**.
 
 - **Nothing you type or choose.** No trip names, no airports or routes, no
   dates, no flight numbers, no bedtimes or wake times, no time zone.
-- No name, email, account, advertising identifier, or device identifier we
-  create.
+- No name, email, account, or advertising identifier.
 - No location, and no screen recordings.
+
+**Besides its name, every event carries a random ID for this install.** The first time the app launches, PostHog generates an anonymous ID
+and stores it on your device, so it can tell that events came from the same
+install without knowing who you are. It contains nothing about you — it isn't
+your name, your account, or an advertising identifier, and nothing links it
+back to you. Uninstall the app, or clear its data on Android, and the next
+launch gets a brand new one; nothing connects the old ID to the new one. Each
+event also carries a session ID (random for that app session), your screen
+size, and the app's own version — technical details about the request, not
+about you.
 
 The events carry **no properties at all** — not even indirect ones like how
 many flights a trip has, because that is still a fact about your trip. An event
 says "a trip was created", never which trip. Two people with completely
-different itineraries send byte-for-byte identical events.
+different itineraries send identical events, apart from each install's own
+random ID.
 
 As with any internet request, PostHog receives the IP address you connect from.
 No profile is built against it.
